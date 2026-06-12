@@ -21,7 +21,7 @@ public class Loader : MonoBehaviour {
     private void Awake() {
         Instance = this;
     }
-    public static void LoadScene(object sender, EventArgs e) {
+    public static void ManageScene(object sender, EventArgs e) {
         loaderCallbackAction = () => {
             SceneManager.LoadScene(Scene.GameScene.ToString());
         };

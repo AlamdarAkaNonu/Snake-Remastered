@@ -23,5 +23,9 @@ public class UIManager : MonoBehaviour {
         if (GameManager.Instance.state == GameManager.State.Alive) {
             GameOverWindow.Instance.HideGameOverWindow();
         }
+        else if(GameManager.Instance.state == GameManager.State.Dead) {
+            //GameOverWindow.Instance.ShowGameOverWindow();\
+            GameOverWindow.Instance.SetGameOverScoreText();
+        }
     }
 }

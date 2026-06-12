@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class ScoreWindow : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI scoreText;
-    private static int score;
+   
+    public static int score;
 
     private void Awake() {
-        OnServerInitialized();
+        OnAwakeSetScoreZero();
         scoreText.GetComponent<TextMeshProUGUI>();
     }
 
@@ -17,10 +18,11 @@ public class ScoreWindow : MonoBehaviour {
         scoreText.text = score.ToString();
     }
 
-    public static void AddScore() {
+    public static int AddScore() {
         score += 100;
+        return score;
     }
-    private void OnServerInitialized() {
+    private void OnAwakeSetScoreZero() {
         score = 0;
     }
 }

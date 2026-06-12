@@ -9,52 +9,63 @@ public class MainMenuWindow : MonoBehaviour {
 
     public event EventHandler onClickPlayButton;
     public event EventHandler onClickQuitButton;
-    public event EventHandler onClickTutorialButton;
+    public event EventHandler onClickHowToPlayButton;
     public event EventHandler onClickhowToPlayBackButton;
-
-    [SerializeField] private GameObject howToPlayWindow;
-
-
+   
+    [Header("Main Menu Window Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
-    [Header("Main Menu Window")]
-    [SerializeField] private Button tutorialButton;
+    [SerializeField] private Button howtoPlayButton;
+
+    [Header("HowToPlayWindow")]
+    [SerializeField] private GameObject howToPlayWindow;
     [SerializeField] private Button howToPlayBackButton;
 
-    private void Awake() {
-
-    }
     private void Start() {
-        //if(GameManager.Instance.state == GameManager.State.Dead) {
 
+        HideHowToPlayWindow();
 
-        //    backButton.gameObject.SetActive(true);
-        //} else {
-        //    backButton.gameObject.SetActive(false);
-        //}
-
-        onClickPlayButton += Loader.LoadScene;
+        //Play Button 
+        onClickPlayButton += Loader.ManageScene;
         playButton.onClick.AddListener(() => {
-            onClickPlayButton?.Invoke(this, EventArgs.Empty);
-            Debug.Log("Play Button Clicked");
+            onClickPlayButton?.Invoke(this, EventArgs.Empty);            
         });
 
-        onClickQuitButton += QuitButton;
+        //Quit Button
+        onClickQuitButton += HandleQuitButton;
         quitButton.onClick.AddListener(() => {
             onClickQuitButton?.Invoke(this, EventArgs.Empty);
         });
-        onClickTutorialButton += TutorialButton;
-        tutorialButton.onClick.AddListener(() => {
-            onClickTutorialButton?.Invoke(this, EventArgs.Empty);
-        }); 
+
+        //HowToPlay Button
+        onClickHowToPlayButton += HandleHowToPlayButton;
+        howtoPlayButton.onClick.AddListener(() => {
+            onClickHowToPlayButton?.Invoke(this, EventArgs.Empty);
+        });
+        //HowToPlayBackButton
+        onClickhowToPlayBackButton += HandleHowToPlayBackButton;
+        howToPlayBackButton.onClick.AddListener(() => {
+            onClickhowToPlayBackButton?.Invoke(this, EventArgs.Empty);
+            howToPlayWindow.SetActive(false);
+        });
     }
 
-    private void TutorialButton(object sender, EventArgs e) {
-        howToPlayWindow.SetActive(true);
+    private void HandleHowToPlayButton(object sender, EventArgs e) {
+        ShowHowToPlayWindow();
     }
 
-    private void QuitButton(object sender, EventArgs e) {
+    private void HandleHowToPlayBackButton(object sender, EventArgs e) {
+        HideHowToPlayWindow();
+    }
+
+    private void HandleQuitButton(object sender, EventArgs e) {
         Application.Quit();
     }
-
+    private void ShowHowToPlayWindow() {
+        howToPlayWindow.SetActive(true);
+    }
+    private void HideHowToPlayWindow() {
+        howToPlayWindow.SetActive(false);
+    }
 }
+
