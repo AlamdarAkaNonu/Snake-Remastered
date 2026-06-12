@@ -10,8 +10,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
-    //Main menu events
-    
 
     //GameOverWindowButton events
     public event EventHandler OnClickMainMenuButton;
