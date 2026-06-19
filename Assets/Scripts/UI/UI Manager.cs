@@ -6,8 +6,7 @@ public class UIManager : MonoBehaviour {
     public static UIManager Instance { get; private set; }
 
     public GameObject gameOverWindow;
-
-
+    
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -16,16 +15,18 @@ public class UIManager : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-    private void Start() {
-
-    }
     private void Update() {
+       // GameOverWindow.Instance.UpdateGameOverHighScore();
+
         if (GameManager.Instance.state == GameManager.State.Alive) {
             GameOverWindow.Instance.HideGameOverWindow();
         }
         else if(GameManager.Instance.state == GameManager.State.Dead) {
-            //GameOverWindow.Instance.ShowGameOverWindow();\
-            GameOverWindow.Instance.SetGameOverScoreText();
+
+            GameOverWindow.Instance.ShowGameOverWindow();
+            GameOverWindow.Instance.UpdateGameOverScore();
+            
+            
         }
     }
 }

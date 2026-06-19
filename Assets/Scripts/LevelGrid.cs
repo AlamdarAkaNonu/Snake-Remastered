@@ -7,6 +7,8 @@ using UnityEngine;
 public class LevelGrid : MonoBehaviour {
     public static LevelGrid Instance { get; private set; }
 
+    [SerializeField] private ScoreWindow scoreWindow;
+
     [SerializeField] private int width;
     [SerializeField] private int height;
 
@@ -47,7 +49,7 @@ public class LevelGrid : MonoBehaviour {
         if (gridPos == foodGridPosition) {
             Destroy(foodGameObject);
             CreateFoodGameObject();
-            ScoreWindow.AddScore();
+            scoreWindow.AddScore();            
             shouldGrow = true;
         }
 
@@ -67,7 +69,7 @@ public class LevelGrid : MonoBehaviour {
         foodGameObject = null;
     }
 
-    // sankeGridPosition ko modify krna he.
+    //Modified from original code, to make the snake able to go through walls and appear on the other side of the grid
     public void ValidateGridPosition(ref Vector2Int snakeGridPosition) {
         // X axis
         if (snakeGridPosition.x == width) {

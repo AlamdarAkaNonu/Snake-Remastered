@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
     //GameOverWindowButton events
-    public event EventHandler OnClickMainMenuButton;
     public event EventHandler OnClickTryAgainButton;
+    public event EventHandler OnClickMainMenuButton;
 
     //[SerializeField] private Button playButton;
 
@@ -30,15 +30,12 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         state = State.Alive;
 
-        // MainMenu Scene Play Buttonn Button
-       
-
-        //TryAgain Button
+        //MainMenu Button
         OnClickMainMenuButton += GameOverWindow.Instance.OnClickMainMenuButton;
         GameOverWindow.Instance.mainMenuButton.onClick.AddListener(() => {
             OnClickMainMenuButton?.Invoke(this, EventArgs.Empty);
         });
-        //Restart Button
+        //TryAgain Button
         OnClickTryAgainButton += GameOverWindow.Instance.OnClickTryAgainButton;
         GameOverWindow.Instance.tryAgainButton.onClick.AddListener(() => {
             OnClickTryAgainButton?.Invoke(this, EventArgs.Empty);

@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f49f22f03da1941975d831c2d104ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScoreText: {fileID: 114331460}
+  gameOverScoreText: {fileID: 114331460}
   tryAgainButton: {fileID: 1796554426}
   mainMenuButton: {fileID: 891700531}
 --- !u!1 &47790375
@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 536580419}
+  highScoreText: {fileID: 1964978403}
 --- !u!1 &458547324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,6 +1790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1ebe7683e12de4888057b11f7011ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreWindow: {fileID: 409810539}
   width: 20
   height: 20
 --- !u!1 &1748667000
@@ -2289,8 +2291,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
