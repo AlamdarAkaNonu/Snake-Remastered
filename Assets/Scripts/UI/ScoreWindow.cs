@@ -5,30 +5,35 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreWindow : MonoBehaviour {
+
+    private const string HighScoreKey = "HighScoreValueText";
+
     [SerializeField] private  TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
         
     public static int score;
     public static int highScore;
 
-    
-    private void Awake() {
+
+    private void Start() {
         OnAwakeSetScoreZero();
-        score += 100;
-        scoreText.text = score.ToString();
-        highScoreText.text = highScore.ToString();
+
+        highScore = PlayerPrefs.GetInt(HighScoreKey, highScore);
+        PlayerPrefs.Save();
     }
 
     private void Update() {
-       
-    }
-
-    public  int AddScore() {
+        scoreText.text = score.ToString();
+        highScoreText.text = highScore.ToString();
 
         if (score > highScore) {
             highScore = score;
+            PlayerPrefs.SetInt(HighScoreKey, score);
         }
+    }
 
+    public  int AddScore() {
+        score += 100;
         return score;
     }
     private void OnAwakeSetScoreZero() {

@@ -11,9 +11,14 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private PausedWindow pausedWindow;
+
     //GameOverWindowButton events
     public event EventHandler OnClickTryAgainButton;
     public event EventHandler OnClickMainMenuButton;
+    //paused Window button events
+    //public event EventHandler OnClickResumeButton;
+    //public event EventHandler OnClickPausedWindowMainMenuButton;
 
     //[SerializeField] private Button playButton;
 
@@ -21,7 +26,8 @@ public class GameManager : MonoBehaviour {
     public State state;
     public enum State {
         Alive,
-        Dead
+        Dead,
+        Paused,
     }
     private void Awake() {
         Instance = this;
@@ -30,18 +36,27 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         state = State.Alive;
 
-        //MainMenu Button
+        //Game Over MainMenu Button
         OnClickMainMenuButton += GameOverWindow.Instance.OnClickMainMenuButton;
         GameOverWindow.Instance.mainMenuButton.onClick.AddListener(() => {
             OnClickMainMenuButton?.Invoke(this, EventArgs.Empty);
         });
-        //TryAgain Button
+        //Game Over TryAgain Button
         OnClickTryAgainButton += GameOverWindow.Instance.OnClickTryAgainButton;
         GameOverWindow.Instance.tryAgainButton.onClick.AddListener(() => {
             OnClickTryAgainButton?.Invoke(this, EventArgs.Empty);
         });
+
+        //Paused window main menu button
+        //OnClickPausedWindowMainMenuButton += HandlePausedWindowMainMenuClick;
+
     }
 
+    //private void HandlePausedWindowMainMenuClick(object sender, EventArgs e) {
+    //    pausedWindow.resumeButton.onClick.AddListener(() => {
+            
+    //    });
+    //}
 
     private void Update() {
         switch (state) {
@@ -50,6 +65,10 @@ public class GameManager : MonoBehaviour {
                 Snake.snake.HandleGridMovenment();
                 break;
             case State.Dead:
+                break;
+
+            case State.Paused:
+                Time.timeScale = 0f;
                 break;
 
         }
