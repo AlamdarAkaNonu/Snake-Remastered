@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
     //GameOverWindowButton events
     public event EventHandler OnClickTryAgainButton;
     public event EventHandler OnClickMainMenuButton;
+
+    public event EventHandler OnClickEscapeButton;
+
     //paused Window button events
     //public event EventHandler OnClickResumeButton;
     //public event EventHandler OnClickPausedWindowMainMenuButton;
@@ -47,14 +50,20 @@ public class GameManager : MonoBehaviour {
             OnClickTryAgainButton?.Invoke(this, EventArgs.Empty);
         });
 
+        OnClickEscapeButton += HandlePausedState;
+
         //Paused window main menu button
         //OnClickPausedWindowMainMenuButton += HandlePausedWindowMainMenuClick;
 
     }
 
+    private void HandlePausedState(object sender, EventArgs e) {
+        
+    }
+
     //private void HandlePausedWindowMainMenuClick(object sender, EventArgs e) {
     //    pausedWindow.resumeButton.onClick.AddListener(() => {
-            
+
     //    });
     //}
 
