@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class PausedWindow : MonoBehaviour {
 
-    public Button resumeButton;
-    public Button mainMenuButton;
+    //public Button resumeButton;
+    //public Button mainMenuButton;
 
-    private void Update() {
+    //private void Update() {
 
-    }
+    //}
 }
