@@ -8,26 +8,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverWindow : MonoBehaviour {
-
-    public static GameOverWindow Instance;
-    
     [Header("texts")]
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
-   
+
     [Header("Buttons")]
     public Button tryAgainButton;
     public Button mainMenuButton;
 
     private void Awake() {
-        Instance = this;
     }
 
     public void ShowGameOverWindow() {
-        UIManager.Instance.gameOverWindow.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void HideGameOverWindow() {
-        UIManager.Instance.gameOverWindow.SetActive(false);
+        gameObject.SetActive(false);
     }
     //Game Over Try Again Button 
     public void OnClickTryAgainButton(object sender, EventArgs e) {
@@ -43,6 +39,6 @@ public class GameOverWindow : MonoBehaviour {
     public void UpdateGameOverScore() {
         gameOverScoreText.text = ScoreWindow.score.ToString();
     }
-    
+
 }
 

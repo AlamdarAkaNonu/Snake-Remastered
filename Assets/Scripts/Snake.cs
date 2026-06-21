@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Snake : MonoBehaviour {
+    [SerializeField] private GameOverWindow gameOverWindow;
 
     public static Snake snake;
 
@@ -320,7 +321,7 @@ public class Snake : MonoBehaviour {
         for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
                 GameManager.Instance.SetStateToGameOver();
-                GameOverWindow.Instance.ShowGameOverWindow();
+                gameOverWindow.ShowGameOverWindow();
             }
         }
     }

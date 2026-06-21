@@ -25,15 +25,15 @@ public class GameManager : MonoBehaviour {
     }
     private void Start() {
         state = State.Alive;
-                
-        
+
+
     }
     private void Update() {
         switch (state) {
             case State.Alive:
                 Snake.snake.HandleInput();
                 Snake.snake.HandleGridMovenment();
-                CheckForEscButtonPressed();
+                HandleEscapeButton();
                 break;
             case State.Dead:
                 break;
@@ -43,15 +43,13 @@ public class GameManager : MonoBehaviour {
     public void SetStateToGameOver() {
         state = State.Dead;
     }
-    private void CheckForEscButtonPressed() {
-        if(Input.GetKeyDown(KeyCode.Escape)) {
-            isPausedWindowActive = true;            
+    private void HandleEscapeButton() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            isPausedWindowActive = true;
             if (isPausedWindowActive == true) {
-
                 Time.timeScale = 0f;
             }
-        }
             
+        }
     }
 }
-

@@ -12,12 +12,17 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField] private PausedWindow pausedWindow;
 
-    public GameObject gameOverWindow;
+    [SerializeField] private GameOverWindow gameOverWindow;
 
 
     //GameOverWindowButton events
     public event EventHandler OnClickTryAgainButton;
     public event EventHandler OnClickMainMenuButton;
+
+
+    //PausedWindow Button events
+    public event EventHandler OnClickResumeButton;
+    public event EventHandler OnClickExitButton;
 
 
 
@@ -34,17 +39,28 @@ public class UIManager : MonoBehaviour {
 
 
         //Game Over MainMenu Button
-        OnClickMainMenuButton += GameOverWindow.Instance.OnClickMainMenuButton;
-        GameOverWindow.Instance.mainMenuButton.onClick.AddListener(() => {
+        OnClickMainMenuButton += gameOverWindow.OnClickMainMenuButton;
+        gameOverWindow.mainMenuButton.onClick.AddListener(() => {
             OnClickMainMenuButton?.Invoke(this, EventArgs.Empty);
         });
         //Game Over TryAgain Button
-        OnClickTryAgainButton += GameOverWindow.Instance.OnClickTryAgainButton;
-        GameOverWindow.Instance.tryAgainButton.onClick.AddListener(() => {
+        OnClickTryAgainButton += gameOverWindow.OnClickTryAgainButton;
+        gameOverWindow.tryAgainButton.onClick.AddListener(() => {
             OnClickTryAgainButton?.Invoke(this, EventArgs.Empty);
         });
 
+        OnClickResumeButton += HandleResumeButton;
+        pausedWindow.resumeButton.onClick.AddListener(() => {
+            OnClickResumeButton?.Invoke(this, EventArgs.Empty);
+        }); 
     }
+
+    private void HandleResumeButton(object sender, EventArgs e) {
+        GameManager.Instance.isPausedWindowActive = false;
+        pausedWindow.HidePausedWindow();
+        Time.timeScale = 1f;
+    }
+
     private void Update() {
         if (GameManager.Instance.isPausedWindowActive == true) {
             pausedWindow.gameObject.SetActive(true);
@@ -56,14 +72,12 @@ public class UIManager : MonoBehaviour {
 
 
         if (GameManager.Instance.state == GameManager.State.Alive) {
-            GameOverWindow.Instance.HideGameOverWindow();
+            gameOverWindow.HideGameOverWindow();
         }
-        else if(GameManager.Instance.state == GameManager.State.Dead) {
+        else if (GameManager.Instance.state == GameManager.State.Dead) {
 
-            GameOverWindow.Instance.ShowGameOverWindow();
-            GameOverWindow.Instance.UpdateGameOverScore();
-            
-            
+            gameOverWindow.ShowGameOverWindow();
+            gameOverWindow.UpdateGameOverScore();
         }
     }
 }
