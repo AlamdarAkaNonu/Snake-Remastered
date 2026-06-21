@@ -7,10 +7,14 @@ using UnityEngine.UI;
 
 public class PausedWindow : MonoBehaviour {
 
-    //public Button resumeButton;
-    //public Button mainMenuButton;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button mainMenuButton;
+    
+    private void Update() {
 
-    //private void Update() {
+    }
 
-    //}
+    public void HidePausedWindow() {
+        gameObject.SetActive(false);
+    }
 }
