@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PausedWindow : MonoBehaviour {
 
     public Button resumeButton;
-    public Button mainMenuButton;
+    public Button exitButton;
 
     public void HidePausedWindow() {
         gameObject.SetActive(false);

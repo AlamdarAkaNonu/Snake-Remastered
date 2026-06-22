@@ -52,7 +52,17 @@ public class UIManager : MonoBehaviour {
         OnClickResumeButton += HandleResumeButton;
         pausedWindow.resumeButton.onClick.AddListener(() => {
             OnClickResumeButton?.Invoke(this, EventArgs.Empty);
-        }); 
+        });
+
+        OnClickExitButton += HandlePausedWindowExitButton;
+        pausedWindow.exitButton.onClick.AddListener(() => {
+            OnClickExitButton?.Invoke(this, EventArgs.Empty);
+        });
+    }
+
+    private void HandlePausedWindowExitButton(object sender, EventArgs e) {
+        Application.Quit();
+        Debug.Log("Exit Button Clicked");
     }
 
     private void HandleResumeButton(object sender, EventArgs e) {
