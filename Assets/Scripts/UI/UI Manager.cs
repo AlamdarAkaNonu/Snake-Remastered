@@ -88,6 +88,7 @@ public class UIManager : MonoBehaviour {
 
             gameOverWindow.ShowGameOverWindow();
             gameOverWindow.UpdateGameOverScore();
+
         }
     }
 }

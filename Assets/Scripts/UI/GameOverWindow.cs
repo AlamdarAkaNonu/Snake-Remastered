@@ -15,7 +15,10 @@ public class GameOverWindow : MonoBehaviour {
     public Button tryAgainButton;
     public Button mainMenuButton;
 
-    private void Awake() {
+    
+
+    private void Update() {
+        
     }
 
     public void ShowGameOverWindow() {
