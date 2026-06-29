@@ -47,6 +47,7 @@ public class LevelGrid : MonoBehaviour {
     public void TrySnakeEatFood(Vector2Int gridPos, bool shouldGrow) {
 
         if (gridPos == foodGridPosition) {
+            SoundManager.PlaySound(SoundManager.Sound.onSnakeEat);
             Destroy(foodGameObject);
             CreateFoodGameObject();
             scoreWindow.AddScore();            
