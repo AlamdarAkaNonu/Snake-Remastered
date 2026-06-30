@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
-    public bool isPausedWindowActive = false;
+    public bool escButtonWasPressed = false;
 
     public State state;
     public enum State {
@@ -45,11 +45,12 @@ public class GameManager : MonoBehaviour {
     }
     private void HandleEscapeButton() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            isPausedWindowActive = true;
-            if (isPausedWindowActive == true) {
+            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
+            escButtonWasPressed = true;
+            if (escButtonWasPressed == true) {
                 Time.timeScale = 0f;
             }
-            
         }
+            
     }
 }

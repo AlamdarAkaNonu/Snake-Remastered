@@ -320,6 +320,7 @@ public class Snake : MonoBehaviour {
     private void SnakeIsDied() {
         for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
+                SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
                 GameManager.Instance.SetStateToGameOver();
                 gameOverWindow.ShowGameOverWindow();
             }

@@ -42,21 +42,25 @@ public class UIManager : MonoBehaviour {
         OnClickMainMenuButton += gameOverWindow.OnClickMainMenuButton;
         gameOverWindow.mainMenuButton.onClick.AddListener(() => {
             OnClickMainMenuButton?.Invoke(this, EventArgs.Empty);
+            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
         });
         //Game Over TryAgain Button
         OnClickTryAgainButton += gameOverWindow.OnClickTryAgainButton;
         gameOverWindow.tryAgainButton.onClick.AddListener(() => {
             OnClickTryAgainButton?.Invoke(this, EventArgs.Empty);
+            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
         });
-
+        //Paused Window Resume button
         OnClickResumeButton += HandleResumeButton;
         pausedWindow.resumeButton.onClick.AddListener(() => {
             OnClickResumeButton?.Invoke(this, EventArgs.Empty);
+            SoundManager.PlaySound(SoundManager.Sound.onButtonClickBack);
         });
-
+        //Paused Window Exit button
         OnClickExitButton += HandlePausedWindowExitButton;
         pausedWindow.exitButton.onClick.AddListener(() => {
             OnClickExitButton?.Invoke(this, EventArgs.Empty);
+            SoundManager.PlaySound(SoundManager.Sound.onButtonClickBack);
         });
     }
 
@@ -66,20 +70,19 @@ public class UIManager : MonoBehaviour {
     }
 
     private void HandleResumeButton(object sender, EventArgs e) {
-        GameManager.Instance.isPausedWindowActive = false;
+        GameManager.Instance.escButtonWasPressed = false;
         pausedWindow.HidePausedWindow();
         Time.timeScale = 1f;
     }
 
     private void Update() {
-        if (GameManager.Instance.isPausedWindowActive == true) {
+        if (GameManager.Instance.escButtonWasPressed == true) {
             pausedWindow.gameObject.SetActive(true);
-
+            
         }
-        else if (GameManager.Instance.isPausedWindowActive == false) {
-            pausedWindow.gameObject.SetActive(false);
-        }
-
+        //else if (GameManager.Instance.isPausedWindowActive == false) {
+        //    pausedWindow.gameObject.SetActive(false);
+        //}
 
         if (GameManager.Instance.state == GameManager.State.Alive) {
             gameOverWindow.HideGameOverWindow();

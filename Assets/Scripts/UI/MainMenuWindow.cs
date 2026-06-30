@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static SoundManager;
 public class MainMenuWindow : MonoBehaviour {
+    [SerializeField] private GameObject soundGameObject;
 
     public event EventHandler onClickPlayButton;
     public event EventHandler onClickQuitButton;
     public event EventHandler onClickHowToPlayButton;
     public event EventHandler onClickhowToPlayBackButton;
-   
+
     [Header("Main Menu Window Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
@@ -21,14 +23,23 @@ public class MainMenuWindow : MonoBehaviour {
     [SerializeField] private GameObject howToPlayWindow;
     [SerializeField] private Button howToPlayBackButton;
 
-    private void Start() {
+    [SerializeField] private AudioClip onButtonnClick;
+    [SerializeField] private AudioClip onButtonnClickBack;
 
+    private float timer = 0f;
+    private float timerMax = 1f;
+    
+    private void Start() {
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+        
         HideHowToPlayWindow();
 
         //Play Button 
         onClickPlayButton += Loader.ManageScene;
         playButton.onClick.AddListener(() => {
-            onClickPlayButton?.Invoke(this, EventArgs.Empty);            
+            onClickPlayButton?.Invoke(this, EventArgs.Empty);
+            //audioSource.PlayOneShot(onButtonnClick);
+
         });
 
         //Quit Button
@@ -41,15 +52,16 @@ public class MainMenuWindow : MonoBehaviour {
         onClickHowToPlayButton += HandleHowToPlayButton;
         howtoPlayButton.onClick.AddListener(() => {
             onClickHowToPlayButton?.Invoke(this, EventArgs.Empty);
+            audioSource.PlayOneShot(onButtonnClick);
         });
         //HowToPlayBackButton
         onClickhowToPlayBackButton += HandleHowToPlayBackButton;
         howToPlayBackButton.onClick.AddListener(() => {
             onClickhowToPlayBackButton?.Invoke(this, EventArgs.Empty);
-            howToPlayWindow.SetActive(false);
+            PlaySound(onButtonnClickBack);
+            audioSource.PlayOneShot(onButtonnClickBack);
         });
     }
-
     private void HandleHowToPlayButton(object sender, EventArgs e) {
         ShowHowToPlayWindow();
     }
@@ -67,5 +79,9 @@ public class MainMenuWindow : MonoBehaviour {
     private void HideHowToPlayWindow() {
         howToPlayWindow.SetActive(false);
     }
-}
+    private void PlaySound(AudioClip audioClip) {
+        
+ 
+    }
 
+}

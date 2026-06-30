@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +11,11 @@ public class Loader : MonoBehaviour {
 
     private static Action loaderCallbackAction;
     
-    private static float timer = 1f;
+    private static float coroutineTimer = 1f;
+
+    private static float timer = 0f;
+    private static float timerMax = 1f;
+
 
 
     public enum Scene {
@@ -23,6 +28,11 @@ public class Loader : MonoBehaviour {
     }
     public static void ManageScene(object sender, EventArgs e) {
         loaderCallbackAction = () => {
+            coroutineTimer += Time.deltaTime;
+            if (coroutineTimer > timerMax) {
+                coroutineTimer = 0f;
+               // MainMenuWindow.
+            }
             SceneManager.LoadScene(Scene.GameScene.ToString());
         };
         SceneManager.LoadScene(Scene.LoadingScene.ToString());
@@ -36,7 +46,7 @@ public class Loader : MonoBehaviour {
 
     }
     public static IEnumerator WaitForSecondsThenLoadGameScene() {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(coroutineTimer);
         Loader.LoaderCallBack();
     }
 }
