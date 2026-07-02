@@ -13,10 +13,6 @@ public class Loader : MonoBehaviour {
     
     private static float coroutineTimer = 1f;
 
-    private static float timer = 0f;
-    private static float timerMax = 1f;
-
-
 
     public enum Scene {
         GameScene,
@@ -26,18 +22,14 @@ public class Loader : MonoBehaviour {
     private void Awake() {
         Instance = this;
     }
-    public static void ManageScene(object sender, EventArgs e) {
+    public static void LoadGameSceneAndLoadingScene(object sender, EventArgs e) {
         loaderCallbackAction = () => {
-            coroutineTimer += Time.deltaTime;
-            if (coroutineTimer > timerMax) {
-                coroutineTimer = 0f;
-               // MainMenuWindow.
-            }
             SceneManager.LoadScene(Scene.GameScene.ToString());
         };
         SceneManager.LoadScene(Scene.LoadingScene.ToString());
-
     }
+
+
     public static void LoaderCallBack() {
         if (loaderCallbackAction != null) {//Gamescene save hwa.
             loaderCallbackAction();

@@ -25,9 +25,6 @@ public class MainMenuWindow : MonoBehaviour {
 
     [SerializeField] private AudioClip onButtonnClick;
     [SerializeField] private AudioClip onButtonnClickBack;
-
-    private float timer = 0f;
-    private float timerMax = 1f;
     
     private void Start() {
         AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
@@ -35,10 +32,11 @@ public class MainMenuWindow : MonoBehaviour {
         HideHowToPlayWindow();
 
         //Play Button 
-        onClickPlayButton += Loader.ManageScene;
+        onClickPlayButton += Loader.LoadGameSceneAndLoadingScene;
         playButton.onClick.AddListener(() => {
             onClickPlayButton?.Invoke(this, EventArgs.Empty);
-            //audioSource.PlayOneShot(onButtonnClick);
+            audioSource.PlayOneShot(onButtonnClick);
+            DontDestroyOnLoad(soundGameObject);
 
         });
 
@@ -46,6 +44,8 @@ public class MainMenuWindow : MonoBehaviour {
         onClickQuitButton += HandleQuitButton;
         quitButton.onClick.AddListener(() => {
             onClickQuitButton?.Invoke(this, EventArgs.Empty);
+            audioSource.PlayOneShot(onButtonnClick);
+            DontDestroyOnLoad(soundGameObject);
         });
 
         //HowToPlay Button

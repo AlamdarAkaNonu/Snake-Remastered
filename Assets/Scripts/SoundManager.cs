@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class SoundManager{
-
+public class SoundManager : MonoBehaviour{
+    public static GameObject soundGameObject;
     public enum Sound{
         onButtonClick,
         onButtonClickBack,
@@ -11,10 +11,11 @@ public static class SoundManager{
         onSnakeEat,
         
     }
+    
     public static void PlaySound(Sound sound) {
-        GameObject soundGameObject = new GameObject("Sound");
-        AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
 
+        soundGameObject = new GameObject("Sound");
+        AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
         audioSource.PlayOneShot(GetAudioClip(sound));
     }
     public static AudioClip GetAudioClip(Sound sound) {

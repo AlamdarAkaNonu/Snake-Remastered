@@ -43,12 +43,14 @@ public class UIManager : MonoBehaviour {
         gameOverWindow.mainMenuButton.onClick.AddListener(() => {
             OnClickMainMenuButton?.Invoke(this, EventArgs.Empty);
             SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
+            DontDestroyOnLoad(SoundManager.soundGameObject);
         });
         //Game Over TryAgain Button
         OnClickTryAgainButton += gameOverWindow.OnClickTryAgainButton;
         gameOverWindow.tryAgainButton.onClick.AddListener(() => {
             OnClickTryAgainButton?.Invoke(this, EventArgs.Empty);
             SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
+            DontDestroyOnLoad(SoundManager.soundGameObject);
         });
         //Paused Window Resume button
         OnClickResumeButton += HandleResumeButton;
@@ -61,12 +63,15 @@ public class UIManager : MonoBehaviour {
         pausedWindow.exitButton.onClick.AddListener(() => {
             OnClickExitButton?.Invoke(this, EventArgs.Empty);
             SoundManager.PlaySound(SoundManager.Sound.onButtonClickBack);
+           DontDestroyOnLoad(SoundManager.soundGameObject);
         });
     }
 
     private void HandlePausedWindowExitButton(object sender, EventArgs e) {
         Application.Quit();
+        DontDestroyOnLoad(SoundManager.soundGameObject);
         Debug.Log("Exit Button Clicked");
+        
     }
 
     private void HandleResumeButton(object sender, EventArgs e) {
@@ -80,10 +85,7 @@ public class UIManager : MonoBehaviour {
             pausedWindow.gameObject.SetActive(true);
             
         }
-        //else if (GameManager.Instance.isPausedWindowActive == false) {
-        //    pausedWindow.gameObject.SetActive(false);
-        //}
-
+       
         if (GameManager.Instance.state == GameManager.State.Alive) {
             gameOverWindow.HideGameOverWindow();
         }

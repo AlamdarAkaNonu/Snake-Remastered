@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
     }
     private void HandleEscapeButton() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
+            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);   
             escButtonWasPressed = true;
             if (escButtonWasPressed == true) {
                 Time.timeScale = 0f;
