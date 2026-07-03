@@ -16,7 +16,7 @@ public class Snake : MonoBehaviour {
     [SerializeField] private float gridMoveTimerMax = 0.1f;
     private float angle;
     private float gridMoveTimer;
-    
+
     private const string SNAKE_CONSTANT = "Snake";
     private const string SNAKE_BODY_CONSTANT = "Snake Body";
 
@@ -199,7 +199,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void UpdateSnakeBodyRotation() {
-        for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
+        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {
             Vector2Int snakePreviousOneMoveDirection = snakePreviousMoveDirectionList[i];
             float bodyAngle = GetRotationAngle(snakePreviousOneMoveDirection) - 90f;
             snakeBodiesTransformList[i].transform.eulerAngles = new Vector3(0, 0, bodyAngle);
@@ -208,7 +208,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void UpdateSnakeCornersRotation() {
-        for (int i = 0; i < snakeBodiesTransformList.Count/*- 1*/; i++) {//loop -1 se start he to iteration 1 se start hogi.
+        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {//loop -1 se start he to iteration 1 se start hogi.
 
             previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
             nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
@@ -242,11 +242,11 @@ public class Snake : MonoBehaviour {
         return 0;
     }
     private void UpdateSnakeCornersPositions() {
-        for (int i = 0; i < snakeBodiesTransformList.Count /*- 1*/; i++) {//loop -1 se start he to iteration 1 se start hogi.
+        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {//loop -1 se start he to iteration 1 se start hogi.
 
             previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
             nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
-
+            
             if (snakePreviousMoveDirectionList[i] != snakePreviousMoveDirectionList[i + 1]) {
 
                 if (GetCornerType() == CornerType.LeftUp) {
@@ -318,7 +318,7 @@ public class Snake : MonoBehaviour {
         return CornerType.None;
     }
     private void SnakeIsDied() {
-        for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
+        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
                 SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
                 GameManager.Instance.SetStateToGameOver();
@@ -327,7 +327,7 @@ public class Snake : MonoBehaviour {
         }
     }
 }
-    
+
 
 
 
