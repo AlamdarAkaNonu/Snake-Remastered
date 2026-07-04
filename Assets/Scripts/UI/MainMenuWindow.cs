@@ -58,7 +58,6 @@ public class MainMenuWindow : MonoBehaviour {
         onClickhowToPlayBackButton += HandleHowToPlayBackButton;
         howToPlayBackButton.onClick.AddListener(() => {
             onClickhowToPlayBackButton?.Invoke(this, EventArgs.Empty);
-            PlaySound(onButtonnClickBack);
             audioSource.PlayOneShot(onButtonnClickBack);
         });
     }
@@ -79,9 +78,5 @@ public class MainMenuWindow : MonoBehaviour {
     private void HideHowToPlayWindow() {
         howToPlayWindow.SetActive(false);
     }
-    private void PlaySound(AudioClip audioClip) {
-        
  
-    }
-
 }

@@ -208,7 +208,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void UpdateSnakeCornersRotation() {
-        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {//loop -1 se start he to iteration 1 se start hogi.
+        for (int i = 0; i < snakeBodiesTransformList.Count -1 ; i++) {//loop -1 se start he to iteration 1 se start hogi.
 
             previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
             nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
@@ -242,11 +242,11 @@ public class Snake : MonoBehaviour {
         return 0;
     }
     private void UpdateSnakeCornersPositions() {
-        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {//loop -1 se start he to iteration 1 se start hogi.
+        for (int i = 0; i < snakeBodiesTransformList.Count -1; i++) {//loop -1 se start he to iteration 1 se start hogi.
 
             previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
-            nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
-            
+            nextIndexDir = snakePreviousMoveDirectionList[i+1];//CurrentHeadMoveDirection
+
             if (snakePreviousMoveDirectionList[i] != snakePreviousMoveDirectionList[i + 1]) {
 
                 if (GetCornerType() == CornerType.LeftUp) {
