@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -199,7 +200,7 @@ public class Snake : MonoBehaviour {
     }
 
     private void UpdateSnakeBodyRotation() {
-        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {
+        for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             Vector2Int snakePreviousOneMoveDirection = snakePreviousMoveDirectionList[i];
             float bodyAngle = GetRotationAngle(snakePreviousOneMoveDirection) - 90f;
             snakeBodiesTransformList[i].transform.eulerAngles = new Vector3(0, 0, bodyAngle);
@@ -208,17 +209,20 @@ public class Snake : MonoBehaviour {
     }
 
     private void UpdateSnakeCornersRotation() {
-        for (int i = 0; i < snakeBodiesTransformList.Count -1 ; i++) {//loop -1 se start he to iteration 1 se start hogi.
+        for (int i = 0; i < snakeBodiesTransformList.Count; i++) {//loop -1 se start he to iteration 1 se start hogi.
 
-            previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
-            nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
+            if (i + 1 < snakePreviousMoveDirectionList.Count) {
 
-            if (nextIndexDir == previousDirIndex)
-                continue;
+                previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
+                nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
 
-            float angleForCorners = GetAngleFromDirection(nextIndexDir, previousDirIndex);
-            snakeBodiesTransformList[i].transform.eulerAngles = new Vector3(0, 0, angleForCorners);
+                if (nextIndexDir == previousDirIndex)
+                    continue;
 
+                float angleForCorners = GetAngleFromDirection(nextIndexDir, previousDirIndex);
+                snakeBodiesTransformList[i].transform.eulerAngles = new Vector3(0, 0, angleForCorners);
+
+            }
         }
     }
 
@@ -242,44 +246,48 @@ public class Snake : MonoBehaviour {
         return 0;
     }
     private void UpdateSnakeCornersPositions() {
-        for (int i = 0; i < snakeBodiesTransformList.Count -1; i++) {//loop -1 se start he to iteration 1 se start hogi.
+        for (int i = 0; i < snakeBodiesTransformList.Count; i++) {//loop -1 se start he to iteration 1 se start hogi.
 
-            previousDirIndex = snakePreviousMoveDirectionList[i];//PreviousMoveDirection
-            nextIndexDir = snakePreviousMoveDirectionList[i+1];//CurrentHeadMoveDirection
+            if (i + 1 < snakePreviousMoveDirectionList.Count) {
 
-            if (snakePreviousMoveDirectionList[i] != snakePreviousMoveDirectionList[i + 1]) {
+                previousDirIndex = snakePreviousMoveDirectionList[i]; //PreviousMoveDirection
+                nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
 
-                if (GetCornerType() == CornerType.LeftUp) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) + 0.22f, snakePreviousMovePositionList[i].y + 0.22f, 0f);
-                }
+                if (previousDirIndex  != nextIndexDir) {
 
-                else if (GetCornerType() == CornerType.UpLeft) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) - 0.22f, snakePreviousMovePositionList[i].y - 0.22f, 0f);
-                }
+                    if (GetCornerType() == CornerType.LeftUp) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) + 0.22f, snakePreviousMovePositionList[i].y + 0.22f, 0f);
+                    }
 
-                else if (GetCornerType() == CornerType.LeftDown) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) + 0.24f, snakePreviousMovePositionList[i].y - 0.16f, 0f);
-                }
+                    else if (GetCornerType() == CornerType.UpLeft) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) - 0.22f, snakePreviousMovePositionList[i].y - 0.22f, 0f);
+                    }
 
-                else if (GetCornerType() == CornerType.DownLeft) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x - 0.15f, snakePreviousMovePositionList[i].y + 0.21f, 0f);
-                }
-                else if (GetCornerType() == CornerType.RightUp) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x - 0.15f, snakePreviousMovePositionList[i].y + 0.2f, 0f);
-                }
+                    else if (GetCornerType() == CornerType.LeftDown) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) + 0.24f, snakePreviousMovePositionList[i].y - 0.16f, 0f);
+                    }
 
-                else if (GetCornerType() == CornerType.UpRight) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x + 0.22f, snakePreviousMovePositionList[i].y - 0.22f, 0f);
-                }
+                    else if (GetCornerType() == CornerType.DownLeft) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x - 0.15f, snakePreviousMovePositionList[i].y + 0.21f, 0f);
+                    }
+                    else if (GetCornerType() == CornerType.RightUp) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x - 0.15f, snakePreviousMovePositionList[i].y + 0.2f, 0f);
+                    }
 
-                else if (GetCornerType() == CornerType.DownRight) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x + 0.19f, snakePreviousMovePositionList[i].y + 0.19f, 0f);
-                }
+                    else if (GetCornerType() == CornerType.UpRight) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x + 0.22f, snakePreviousMovePositionList[i].y - 0.22f, 0f);
+                    }
 
-                else if (GetCornerType() == CornerType.RightDown) {
-                    snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x - 0.3f, snakePreviousMovePositionList[i].y - 0.2f, 0f);
+                    else if (GetCornerType() == CornerType.DownRight) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x + 0.19f, snakePreviousMovePositionList[i].y + 0.19f, 0f);
+                    }
+
+                    else if (GetCornerType() == CornerType.RightDown) {
+                        snakeBodiesTransformList[i].transform.position = new Vector3(snakePreviousMovePositionList[i].x - 0.3f, snakePreviousMovePositionList[i].y - 0.2f, 0f);
+                    }
                 }
             }
+                
         }
 
     }
@@ -318,7 +326,7 @@ public class Snake : MonoBehaviour {
         return CornerType.None;
     }
     private void SnakeIsDied() {
-        for (int i = 0; i < snakeBodiesTransformList.Count ; i++) {
+        for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
                 SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
                 GameManager.Instance.SetStateToGameOver();

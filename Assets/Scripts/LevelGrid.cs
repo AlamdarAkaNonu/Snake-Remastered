@@ -24,6 +24,9 @@ public class LevelGrid : MonoBehaviour {
     private void Start() {
         CreateFoodGameObject();
     }
+    private void Update() {
+        
+    }
     public LevelGrid(int width, int height) {
         this.width = width;
         this.height = height;
