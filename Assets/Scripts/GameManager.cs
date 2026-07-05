@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     }
     private void Start() {
         state = State.Alive;
-        Application.targetFrameRate = 60;
+        
 
     }
     private void Update() {
