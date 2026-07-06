@@ -70,8 +70,6 @@ public class UIManager : MonoBehaviour {
     private void HandlePausedWindowExitButton(object sender, EventArgs e) {
         Application.Quit();
         DontDestroyOnLoad(SoundManager.soundGameObject);
-        Debug.Log("Exit Button Clicked");
-        
     }
 
     private void HandleResumeButton(object sender, EventArgs e) {
