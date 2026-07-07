@@ -325,14 +325,14 @@ public class Snake : MonoBehaviour {
 
         return CornerType.None;
     }
-    private void SnakeIsDied() {
+    public void SnakeIsDied() {
         for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
+                GameManager.Instance.SetGameStateToDead();
                 SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
-                GameManager.Instance.SetStateToGameOver();
-                gameOverWindow.ShowGameOverWindow();
+
             }
-        }
+        }        
     }
 }
 

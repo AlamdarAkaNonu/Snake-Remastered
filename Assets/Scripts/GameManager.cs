@@ -25,22 +25,23 @@ public class GameManager : MonoBehaviour {
     }
     private void Start() {
         state = State.Alive;
-        
 
     }
     private void Update() {
         switch (state) {
+
             case State.Alive:
                 Snake.snake.HandleInput();
                 Snake.snake.HandleGridMovenment();
                 HandleEscapeButton();
                 break;
-            case State.Dead:
+            case State.Dead:                
                 break;
 
         }
     }
-    public void SetStateToGameOver() {
+                          
+    public void SetGameStateToDead() {
         state = State.Dead;
     }
     private void HandleEscapeButton() {

@@ -45,6 +45,7 @@ public class LevelGrid : MonoBehaviour {
 
         foodGameObject = new GameObject(FOOD_CONSTANT, typeof(SpriteRenderer));
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.Instance.foodSprite;
+        foodGameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y);
     }
     public void TrySnakeEatFood(Vector2Int gridPos, bool shouldGrow) {

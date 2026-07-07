@@ -88,9 +88,10 @@ public class UIManager : MonoBehaviour {
             gameOverWindow.HideGameOverWindow();
         }
         else if (GameManager.Instance.state == GameManager.State.Dead) {
-
             gameOverWindow.ShowGameOverWindow();
             gameOverWindow.UpdateGameOverScore();
+
+
 
         }
     }
