@@ -39,6 +39,7 @@ public class Snake : MonoBehaviour {
 
     private static List<Vector2Int> snakePreviousMovePositionList;
     private static List<Vector2Int> snakePreviousMoveDirectionList;
+
     public static List<Transform> snakeBodiesTransformList;
 
 
