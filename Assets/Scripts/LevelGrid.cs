@@ -77,7 +77,22 @@ public class LevelGrid : MonoBehaviour {
     //Modified from original code, to make the snake able to go through walls and appear on the other side of the grid
     public void ValidateGridPosition(ref Vector2Int snakeGridPosition) {
         // X axis
-        if (snakeGridPosition.x == width) {
+        if (snakeGridPosition.x < 0) {
+            snakeGridPosition.x = width;
+        }
+        else if (snakeGridPosition.x > width) {
+            snakeGridPosition.x = 0;
+        }
+
+        // Y axis
+        if (snakeGridPosition.y < 0 ) {
+            snakeGridPosition.y = height;
+        }
+        else if (snakeGridPosition.y > height) {
+            snakeGridPosition.y = 0;
+        }
+
+        /*if (snakeGridPosition.x == width) {
             snakeGridPosition.x = 1;
         }
         else if (snakeGridPosition.x == 0) {
@@ -85,11 +100,11 @@ public class LevelGrid : MonoBehaviour {
         }
 
         // Y axis
-        if (snakeGridPosition.y == height) {
+        if (snakeGridPosition.y == height ) {
             snakeGridPosition.y = 1;
         }
         else if (snakeGridPosition.y == 0) {
             snakeGridPosition.y = height - 1;
-        }
+        }*/
     }
 }

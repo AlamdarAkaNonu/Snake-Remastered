@@ -61,7 +61,7 @@ public class Snake : MonoBehaviour {
 
         snake = this;
 
-        snakeGridPosition = new Vector2Int(10, 10);
+        snakeGridPosition = new Vector2Int(10,10);
         snakeGridMoveDirection = new Vector2Int(0, 1);
         snakePreviousMovePositionList = new List<Vector2Int>();
         snakeBodiesTransformList = new List<Transform>();
