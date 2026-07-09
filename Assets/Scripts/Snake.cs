@@ -165,6 +165,7 @@ public class Snake : MonoBehaviour {
         snakeBodyPartGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.Instance.snakeBodyPartSprite;
         snakeBodyPartGameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
+
     }
     public static GameObject GetSnakeBodyPart() {
         return snakeBodyPartGameObject;

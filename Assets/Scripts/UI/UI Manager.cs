@@ -92,10 +92,14 @@ public class UIManager : MonoBehaviour {
             gameOverWindow.UpdateGameOverScore();
 
             Destroy(Snake.snakeHeadGameObject);
-            Snake.snakeBodyPartGameObject.SetActive(false);
+
+            //transform.Find("Snake Body").gameObject.SetActive(false);
+
+
             Destroy(LevelGrid.Instance.GetFoodGameObject());
 
 
         }
     }
 }
+
