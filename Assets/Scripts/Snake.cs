@@ -137,6 +137,7 @@ public class Snake : MonoBehaviour {
             LevelGrid.Instance.TrySnakeEatFood(snakeGridPosition, shouldGrow);
 
 
+
             CutSnakeBodyTail();
 
             UpdateSnakeHeadPosition();
@@ -159,6 +160,7 @@ public class Snake : MonoBehaviour {
     }
     // Creating snake body part game object
     public static void CreateSnakeBodyGameObject() {
+
         snakeBodyPartGameObject = new GameObject(SNAKE_BODY_CONSTANT, typeof(SpriteRenderer));
         snakeBodyPartGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.Instance.snakeBodyPartSprite;
         snakeBodyPartGameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -330,8 +332,7 @@ public class Snake : MonoBehaviour {
         for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
                 GameManager.Instance.SetGameStateToDead();
-                SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
-
+                SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);                
             }
         }        
     }

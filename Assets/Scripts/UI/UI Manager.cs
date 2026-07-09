@@ -90,8 +90,9 @@ public class UIManager : MonoBehaviour {
         else if (GameManager.Instance.state == GameManager.State.Dead) {
             gameOverWindow.ShowGameOverWindow();
             gameOverWindow.UpdateGameOverScore();
+
             Destroy(Snake.snakeHeadGameObject);
-            Snake.snakeBodiesTransformList.Clear();
+            Snake.snakeBodyPartGameObject.SetActive(false);
             Destroy(LevelGrid.Instance.GetFoodGameObject());
 
 
