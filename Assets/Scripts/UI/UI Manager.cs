@@ -72,16 +72,16 @@ public class UIManager : MonoBehaviour {
     }
 
     private void HandleResumeButton(object sender, EventArgs e) {
-        //GameManager.Instance.escButtonWasPressed = false;
+        pausedWindow.escButtonWasPressed = false;
         pausedWindow.HidePausedWindow();
         Time.timeScale = 1f;
     }
 
     private void Update() {
-    /*    if (GameManager.Instance.escButtonWasPressed == true) {
+        if (pausedWindow.escButtonWasPressed == true) {
             pausedWindow.gameObject.SetActive(true);
         }
-    */   
+
         if (GameManager.Instance.state == GameManager.State.Alive) {
             gameOverWindow.HideGameOverWindow();
         }

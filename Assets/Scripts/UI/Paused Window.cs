@@ -19,11 +19,8 @@ public class PausedWindow : MonoBehaviour {
     public void HandleEscapeButton() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             escButtonWasPressed = true;
-            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);
             if (escButtonWasPressed == true) {
                 Time.timeScale = 0f;
-                escButtonWasPressed = false;
-
             }
         }
     }

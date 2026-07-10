@@ -338,6 +338,7 @@ public class Snake : MonoBehaviour {
                     GameObject gameObject = GameObject.FindWithTag("Dead");
                     gameObject.SetActive(false);
                 }
+
                 snakeBodyPartGameObject.SetActive(false);
                 GameManager.Instance.SetGameStateToDead();
                 SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
