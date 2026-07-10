@@ -62,7 +62,7 @@ public class Snake : MonoBehaviour {
 
         snake = this;
 
-        snakeGridPosition = new Vector2Int(10,10);
+        snakeGridPosition = new Vector2Int(10, 10);
         snakeGridMoveDirection = new Vector2Int(0, 1);
         snakePreviousMovePositionList = new List<Vector2Int>();
         snakeBodiesTransformList = new List<Transform>();
@@ -164,6 +164,7 @@ public class Snake : MonoBehaviour {
         snakeBodyPartGameObject = new GameObject(SNAKE_BODY_CONSTANT, typeof(SpriteRenderer));
         snakeBodyPartGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.Instance.snakeBodyPartSprite;
         snakeBodyPartGameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        snakeBodyPartGameObject.gameObject.tag = "Dead";
 
 
     }
@@ -257,7 +258,7 @@ public class Snake : MonoBehaviour {
                 previousDirIndex = snakePreviousMoveDirectionList[i]; //PreviousMoveDirection
                 nextIndexDir = snakePreviousMoveDirectionList[i + 1];//CurrentHeadMoveDirection
 
-                if (previousDirIndex  != nextIndexDir) {
+                if (previousDirIndex != nextIndexDir) {
 
                     if (GetCornerType() == CornerType.LeftUp) {
                         snakeBodiesTransformList[i].transform.position = new Vector3((snakePreviousMovePositionList[i].x) + 0.22f, snakePreviousMovePositionList[i].y + 0.22f, 0f);
@@ -291,7 +292,7 @@ public class Snake : MonoBehaviour {
                     }
                 }
             }
-                
+
         }
 
     }
@@ -332,10 +333,16 @@ public class Snake : MonoBehaviour {
     public void SnakeIsDied() {
         for (int i = 0; i < snakeBodiesTransformList.Count; i++) {
             if (snakeGridPosition == snakePreviousMovePositionList[i]) {
+
+                for (int j = 0; j < Snake.snakeBodiesTransformList.Count; j++) {
+                    GameObject gameObject = GameObject.FindWithTag("Dead");
+                    gameObject.SetActive(false);
+                }
+                snakeBodyPartGameObject.SetActive(false);
                 GameManager.Instance.SetGameStateToDead();
-                SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);                
+                SoundManager.PlaySound(SoundManager.Sound.onSnakeDied);
             }
-        }        
+        }
     }
 }
 

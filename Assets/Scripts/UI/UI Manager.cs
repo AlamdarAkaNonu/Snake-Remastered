@@ -36,8 +36,7 @@ public class UIManager : MonoBehaviour {
     }
     private void Start() {
         pausedWindow.HidePausedWindow();
-
-
+        
         //Game Over MainMenu Button
         OnClickMainMenuButton += gameOverWindow.OnClickMainMenuButton;
         gameOverWindow.mainMenuButton.onClick.AddListener(() => {
@@ -73,30 +72,24 @@ public class UIManager : MonoBehaviour {
     }
 
     private void HandleResumeButton(object sender, EventArgs e) {
-        GameManager.Instance.escButtonWasPressed = false;
+        //GameManager.Instance.escButtonWasPressed = false;
         pausedWindow.HidePausedWindow();
         Time.timeScale = 1f;
     }
 
     private void Update() {
-        if (GameManager.Instance.escButtonWasPressed == true) {
+    /*    if (GameManager.Instance.escButtonWasPressed == true) {
             pausedWindow.gameObject.SetActive(true);
-            
         }
-       
+    */   
         if (GameManager.Instance.state == GameManager.State.Alive) {
             gameOverWindow.HideGameOverWindow();
         }
         else if (GameManager.Instance.state == GameManager.State.Dead) {
-            gameOverWindow.ShowGameOverWindow();
-            gameOverWindow.UpdateGameOverScore();
-
-            Destroy(Snake.snakeHeadGameObject);
-
-            //transform.Find("Snake Body").gameObject.SetActive(false);
-
 
             Destroy(LevelGrid.Instance.GetFoodGameObject());
+            gameOverWindow.ShowGameOverWindow();
+            gameOverWindow.UpdateGameOverScore();
 
 
         }

@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour{
         onButtonClickBack,
         onSnakeDied,
         onSnakeEat,
-        
+                
     }
     
     public static void PlaySound(Sound sound) {

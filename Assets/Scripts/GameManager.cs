@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
-    public bool escButtonWasPressed = false;
+    [SerializeField] private PausedWindow pausedWindow;
 
     public State state;
     public enum State {
@@ -33,9 +33,9 @@ public class GameManager : MonoBehaviour {
             case State.Alive:
                 Snake.snake.HandleInput();
                 Snake.snake.HandleGridMovenment();
-                HandleEscapeButton();
+                pausedWindow.HandleEscapeButton();
                 break;
-            case State.Dead:                
+            case State.Dead:
                 break;
 
         }
@@ -44,14 +44,5 @@ public class GameManager : MonoBehaviour {
     public void SetGameStateToDead() {
         state = State.Dead;
     }
-    private void HandleEscapeButton() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            SoundManager.PlaySound(SoundManager.Sound.onButtonClick);   
-            escButtonWasPressed = true;
-            if (escButtonWasPressed == true) {
-                Time.timeScale = 0f;
-            }
-        }
-            
-    }
+    
 }
