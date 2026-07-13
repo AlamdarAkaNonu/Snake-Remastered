@@ -24,8 +24,6 @@ public class UIManager : MonoBehaviour {
     public event EventHandler OnClickResumeButton;
     public event EventHandler OnClickExitButton;
 
-
-
     private void Awake() {
         if (Instance == null) {
             Instance = this;
