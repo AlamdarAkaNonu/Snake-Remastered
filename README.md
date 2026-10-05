@@ -60,6 +60,9 @@ the code.
 That experience changed the way I approach debugging and problem
 solving.
 
+Published & Monetized
+Snake Remastered is publicly available on itch.io as a paid game. Publishing the project allowed me to take the step from developing a personal project to making my work available to real users.
+
 ## Screenshots
 
 ### Gameplay
